@@ -3,6 +3,8 @@ import s from './Cast.module.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMoviesCredits } from 'services/movies-api';
+import defaultImg from '../../images/broken_img.jpeg'
+
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -10,6 +12,8 @@ const Cast = () => {
   const [cast, setCast] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const imgBaseUrl = 'https://image.tmdb.org/t/p/w300'
 
   useEffect(() => {
     const fetchCast = async () => {
@@ -35,7 +39,7 @@ const Cast = () => {
           return (
             <li key={castItem.id} className={s.castItem}>
               <img
-                src={`https://image.tmdb.org/t/p/w300${castItem.profile_path}`}
+                src={castItem ? `${imgBaseUrl}${castItem.profile_path}` : defaultImg}
                 alt={`${castItem.name} portrait`}
               />
               <div>
