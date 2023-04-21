@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Appbar from './AppBar/AppBar';
 
 const HomePage = lazy(() =>
@@ -24,8 +24,8 @@ export const App = () => {
       {/* <SearchBar></SearchBar> */}
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route index element={<HomePage />}></Route>
-          <Route path="movies" element={<MoviesPage />}></Route>
+          <Route index element={<Navigate to="home" />}></Route>
+          <Route path="/movies" element={<MoviesPage />}></Route>
           <Route path="/movies/:movieId/" element={<MovieDetailsPage />}>
             <Route path="/movies/:movieId/reviews" element={<Reviews />} />
             <Route path="/movies/:movieId/cast" element={<Cast />} />
